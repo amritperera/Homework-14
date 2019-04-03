@@ -50,7 +50,7 @@ function createMap(bikeStations) {
 function createMarkers(response) {
 
   // Pull the "stations" property off of response.data
-  var stations = response.data.stations;
+  var stations = response.features;
 
   // Initialize an array to hold bike markers
   var bikeMarkers = [];
@@ -60,8 +60,8 @@ function createMarkers(response) {
     var station = stations[index];
 
     // For each station, create a marker and bind a popup with the station's name
-    var bikeMarker = L.marker([station.lat, station.lon])
-      .bindPopup("<h3>" + station.name + "<h3><h3>Capacity: " + station.capacity + "<h3>");
+    var bikeMarker = L.marker([station.geometry.coordinates[0], station.geometry.coordinates[1]])
+      .bindPopup("<h3>" + station.id + "<h3><h3>Magnitude: " + station.properties.mag + "<h3>");
 
     // Add the marker to the bikeMarkers array
     bikeMarkers.push(bikeMarker);
@@ -73,4 +73,4 @@ function createMarkers(response) {
 
 
 // Perform an API call to the Citi Bike API to get station information. Call createMarkers when complete
-d3.json("https://gbfs.citibikenyc.com/gbfs/en/station_information.json", createMarkers);
+d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson", createMarkers);
