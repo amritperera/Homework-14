@@ -37,7 +37,7 @@ function createMap(bikeStations) {
   // Create the map object with options
   var map = L.map("map-id", {
     center: [40.73, -74.0059],
-    zoom: 12,
+    zoom: 2,
     layers: [lightmap, bikeStations]
   });
 
